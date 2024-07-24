@@ -51,6 +51,10 @@
        but better to just reject ancient C code. */
 #endif
 
+#ifndef PCG_FN
+#define PCG_FN
+#endif
+
 #if __cplusplus
 extern "C" {
 #endif
@@ -83,7 +87,7 @@ inline uint16_t pcg_rotr_16(uint16_t value, unsigned int rot)
 #endif
 }
 
-inline uint32_t pcg_rotr_32(uint32_t value, unsigned int rot)
+PCG_FN inline uint32_t pcg_rotr_32(uint32_t value, unsigned int rot)
 {
 #if PCG_USE_INLINE_ASM && __clang__ && (__x86_64__  || __i386__)
     asm ("rorl   %%cl, %0" : "=r" (value) : "0" (value), "c" (rot));
@@ -153,7 +157,7 @@ inline uint16_t pcg_output_xsh_rr_32_16(uint32_t state)
     return pcg_rotr_16(((state >> 10u) ^ state) >> 12u, state >> 28u);
 }
 
-inline uint32_t pcg_output_xsh_rr_64_32(uint64_t state)
+PCG_FN inline uint32_t pcg_output_xsh_rr_64_32(uint64_t state)
 {
     return pcg_rotr_32(((state >> 18u) ^ state) >> 27u, state >> 59u);
 }
@@ -585,7 +589,7 @@ inline void pcg_unique_64_advance_r(struct pcg_state_64* rng, uint64_t delta)
                              (uint64_t)(((intptr_t)rng) | 1u));
 }
 
-inline void pcg_setseq_64_step_r(struct pcg_state_setseq_64* rng)
+PCG_FN inline void pcg_setseq_64_step_r(struct pcg_state_setseq_64* rng)
 {
     rng->state = rng->state * PCG_DEFAULT_MULTIPLIER_64 + rng->inc;
 }
@@ -787,7 +791,7 @@ inline void pcg_unique_64_srandom_r(struct pcg_state_64* rng,
     pcg_unique_64_step_r(rng);
 }
 
-inline void pcg_setseq_64_srandom_r(struct pcg_state_setseq_64* rng,
+PCG_FN inline void pcg_setseq_64_srandom_r(struct pcg_state_setseq_64* rng,
                                     uint64_t initstate, uint64_t initseq)
 {
     rng->state = 0U;
@@ -1371,7 +1375,7 @@ pcg_setseq_32_xsh_rr_16_boundedrand_r(struct pcg_state_setseq_32* rng,
     }
 }
 
-inline uint32_t
+PCG_FN inline uint32_t
 pcg_setseq_64_xsh_rr_32_random_r(struct pcg_state_setseq_64* rng)
 {
     uint64_t oldstate = rng->state;
