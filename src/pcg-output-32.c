@@ -34,7 +34,7 @@
  * Rotate helper functions.
  */
 
-extern inline uint32_t pcg_rotr_32(uint32_t value, unsigned int rot);
+extern PCG_FN inline uint32_t pcg_rotr_32(uint32_t value, unsigned int rot);
 
 /*
  * Output functions.  These are the core of the PCG generation scheme.
@@ -46,7 +46,7 @@ extern inline uint32_t pcg_output_xsh_rs_64_32(uint64_t state);
 
 /* XSH RR */
 
-extern inline uint32_t pcg_output_xsh_rr_64_32(uint64_t state);
+extern PCG_FN inline uint32_t pcg_output_xsh_rr_64_32(uint64_t state);
 
 /* RXS M XS */
 

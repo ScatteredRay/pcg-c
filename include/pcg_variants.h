@@ -51,7 +51,9 @@
        but better to just reject ancient C code. */
 #endif
 
-#ifndef PCG_FN
+#if defined(__HIPCC__) && !defined(__clang_analyzer__)
+#define PCG_FN __device__ __host__
+#else
 #define PCG_FN
 #endif
 
@@ -397,7 +399,7 @@ extern uint16_t pcg_advance_lcg_16(uint16_t state, uint16_t delta,
                                    uint16_t cur_mult, uint16_t cur_plus);
 extern uint32_t pcg_advance_lcg_32(uint32_t state, uint32_t delta,
                                    uint32_t cur_mult, uint32_t cur_plus);
-extern uint64_t pcg_advance_lcg_64(uint64_t state, uint64_t delta,
+PCG_FN extern uint64_t pcg_advance_lcg_64(uint64_t state, uint64_t delta,
                                    uint64_t cur_mult, uint64_t cur_plus);
 
 #if PCG_HAS_128BIT_OPS
@@ -594,7 +596,7 @@ PCG_FN inline void pcg_setseq_64_step_r(struct pcg_state_setseq_64* rng)
     rng->state = rng->state * PCG_DEFAULT_MULTIPLIER_64 + rng->inc;
 }
 
-inline void pcg_setseq_64_advance_r(struct pcg_state_setseq_64* rng,
+PCG_FN inline void pcg_setseq_64_advance_r(struct pcg_state_setseq_64* rng,
                                     uint64_t delta)
 {
     rng->state = pcg_advance_lcg_64(rng->state, delta,

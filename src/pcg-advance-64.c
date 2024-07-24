@@ -41,7 +41,7 @@
  * signed integer to go backwards, it just goes "the long way round".
  */
 
-uint64_t pcg_advance_lcg_64(uint64_t state, uint64_t delta, uint64_t cur_mult,
+PCG_FN uint64_t pcg_advance_lcg_64(uint64_t state, uint64_t delta, uint64_t cur_mult,
                             uint64_t cur_plus)
 {
     uint64_t acc_mult = 1u;

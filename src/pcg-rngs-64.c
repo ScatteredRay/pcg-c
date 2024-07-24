@@ -50,9 +50,9 @@ extern inline void pcg_unique_64_step_r(struct pcg_state_64* rng);
 extern inline void pcg_unique_64_advance_r(struct pcg_state_64* rng,
                                            uint64_t delta);
 
-extern inline void pcg_setseq_64_step_r(struct pcg_state_setseq_64* rng);
+extern PCG_FN inline void pcg_setseq_64_step_r(struct pcg_state_setseq_64* rng);
 
-extern inline void pcg_setseq_64_advance_r(struct pcg_state_setseq_64* rng,
+extern PCG_FN inline void pcg_setseq_64_advance_r(struct pcg_state_setseq_64* rng,
                                            uint64_t delta);
 
 /* Functions to seed the RNG state, one version for each size and each
@@ -69,7 +69,7 @@ extern inline void pcg_mcg_64_srandom_r(struct pcg_state_64* rng,
 extern inline void pcg_unique_64_srandom_r(struct pcg_state_64* rng,
                                            uint64_t initstate);
 
-extern inline void pcg_setseq_64_srandom_r(struct pcg_state_setseq_64* rng,
+extern PCG_FN inline void pcg_setseq_64_srandom_r(struct pcg_state_setseq_64* rng,
                                            uint64_t initstate,
                                            uint64_t initseq);
 
@@ -142,7 +142,7 @@ pcg_unique_64_xsh_rr_32_random_r(struct pcg_state_64* rng);
 extern inline uint32_t
 pcg_unique_64_xsh_rr_32_boundedrand_r(struct pcg_state_64* rng, uint32_t bound);
 
-extern inline uint32_t
+extern PCG_FN inline uint32_t
 pcg_setseq_64_xsh_rr_32_random_r(struct pcg_state_setseq_64* rng);
 
 extern inline uint32_t
